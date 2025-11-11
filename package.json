@@ -1,0 +1,72 @@
+{
+  "name": "condominioplus",
+  "version": "1.0.0",
+  "description": "Condomínio+ - Gestor Financeiro de Condomínios",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite --port 5173",
+    "dev:electron": "wait-on -d 1000 http://localhost:5173 && cross-env NODE_ENV=development electron .",
+    "build": "vite build",
+    "build:win": "npm run build && electron-builder --win",
+    "build:mac": "npm run build && electron-builder --mac",
+    "build:linux": "npm run build && electron-builder --linux"
+  },
+  "keywords": [
+    "condominium",
+    "management",
+    "finance"
+  ],
+  "author": "Neufox",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.1",
+    "@types/node": "^24.9.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "wait-on": "^9.0.1"
+  },
+  "dependencies": {
+    "lucide-react": "^0.552.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sql.js": "^1.13.0"
+  },
+  "build": {
+    "appId": "com.condominioplus.app",
+    "productName": "Condomínio+",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "dist-react/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "build/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "build/icon.png"
+    }
+  }
+}
